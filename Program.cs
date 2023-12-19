@@ -4,8 +4,13 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 class Program {
 	static void Main(string[] _) {
-		var compilation =
-			CSharpCompilation.Create(null).AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location));
+		var compilation = CSharpCompilation.Create(null)
+							  .WithOptions(new CSharpCompilationOptions(OutputKind.ConsoleApplication))
+							  .AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+											 MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
+											 MetadataReference.CreateFromFile(typeof(Environment).Assembly.Location),
+											 MetadataReference.CreateFromFile(Path.Combine(
+												 Path.GetDirectoryName(typeof(object).Assembly.Location), "System.Runtime.dll")));
 
 		var file = "Class1.cs";
 		var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(file), CSharpParseOptions.Default, file);
