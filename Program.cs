@@ -39,6 +39,7 @@ class Walker: CSharpSyntaxWalker {
 		Console.WriteLine(node);
 		Console.WriteLine(symbolInfo.Symbol);
 		Console.WriteLine(symbolInfo.CandidateSymbols.ToArray());
+		Console.WriteLine(symbolInfo.CandidateReason);
 	}
 
 	readonly SemanticModel model;
