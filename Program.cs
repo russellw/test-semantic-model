@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
-using static System.Net.Mime.MediaTypeNames;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 class Program {
 	static void Main(string[] _) {
@@ -15,5 +15,26 @@ class Program {
 			Environment.Exit(1);
 		}
 		compilation = compilation.AddSyntaxTrees(tree);
+
+		var model = compilation.GetSemanticModel(tree);
+		var root = tree.GetCompilationUnitRoot();
+		new Walker(model).Visit(root);
 	}
+}
+
+class Walker: CSharpSyntaxWalker {
+	public Walker(SemanticModel model) {
+		this.model = model;
+	}
+
+	public override void VisitInvocationExpression(InvocationExpressionSyntax node) {
+		base.VisitInvocationExpression(node);
+
+		var symbolInfo = model.GetSymbolInfo(node);
+		Console.WriteLine(node);
+		Console.WriteLine(symbolInfo.Symbol);
+		Console.WriteLine(symbolInfo.CandidateSymbols.ToArray());
+	}
+
+	readonly SemanticModel model;
 }
