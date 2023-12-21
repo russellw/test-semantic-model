@@ -32,6 +32,14 @@ class Walker: CSharpSyntaxWalker {
 		this.model = model;
 	}
 
+	public override void VisitBinaryExpression(BinaryExpressionSyntax node) {
+		base.VisitBinaryExpression(node);
+
+		Console.WriteLine(node);
+		Console.WriteLine(model.GetTypeInfo(node).Type);
+		Console.WriteLine();
+	}
+
 	public override void VisitInvocationExpression(InvocationExpressionSyntax node) {
 		base.VisitInvocationExpression(node);
 
@@ -40,6 +48,7 @@ class Walker: CSharpSyntaxWalker {
 		Console.WriteLine(symbolInfo.Symbol);
 		Console.WriteLine(symbolInfo.CandidateSymbols.ToArray());
 		Console.WriteLine(symbolInfo.CandidateReason);
+		Console.WriteLine();
 	}
 
 	readonly SemanticModel model;
