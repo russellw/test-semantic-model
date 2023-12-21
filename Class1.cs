@@ -8,4 +8,16 @@
 		var c = a + b;
 		return b * c;
 	}
+
+	string Method3(int a) {
+		return string.Format("{0}", a) + a;
+	}
+
+	string Method4(int a) {
+		return a.ToString() + a;
+	}
+
+	int Method5() {
+		return Method2(1) + Method2(2);
+	}
 }

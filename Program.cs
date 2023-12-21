@@ -35,6 +35,7 @@ class Walker: CSharpSyntaxWalker {
 	public override void VisitBinaryExpression(BinaryExpressionSyntax node) {
 		base.VisitBinaryExpression(node);
 
+		Console.WriteLine("----------------- type info");
 		Console.WriteLine(node);
 		Console.WriteLine(model.GetTypeInfo(node).Type);
 		Console.WriteLine();
@@ -43,6 +44,7 @@ class Walker: CSharpSyntaxWalker {
 	public override void VisitInvocationExpression(InvocationExpressionSyntax node) {
 		base.VisitInvocationExpression(node);
 
+		Console.WriteLine("----------------- symbol info");
 		var symbolInfo = model.GetSymbolInfo(node);
 		Console.WriteLine(node);
 		Console.WriteLine(symbolInfo.Symbol);
