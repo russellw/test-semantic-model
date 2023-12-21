@@ -4,12 +4,21 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 class Program {
 	static void Main(string[] _) {
-		var compilation = CSharpCompilation.Create(null).AddReferences(
-			MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-			MetadataReference.CreateFromFile("bin\\Debug\\net7.0\\test-semantic-model.dll"));
+		var compilation =
+			CSharpCompilation.Create(null).AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location));
+		// MetadataReference.CreateFromFile("bin\\Debug\\net7.0\\test-semantic-model.dll"));
 
-		var file = "Class1.cs";
+		var file = "StaticClass.cs";
 		var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(file), CSharpParseOptions.Default, file);
+		if (tree.GetDiagnostics().Any()) {
+			foreach (var diagnostic in tree.GetDiagnostics())
+				Console.Error.WriteLine(diagnostic);
+			Environment.Exit(1);
+		}
+		compilation = compilation.AddSyntaxTrees(tree);
+
+		file = "Class1.cs";
+		tree = CSharpSyntaxTree.ParseText(File.ReadAllText(file), CSharpParseOptions.Default, file);
 		if (tree.GetDiagnostics().Any()) {
 			foreach (var diagnostic in tree.GetDiagnostics())
 				Console.Error.WriteLine(diagnostic);
