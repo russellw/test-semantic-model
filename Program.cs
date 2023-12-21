@@ -4,8 +4,9 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 class Program {
 	static void Main(string[] _) {
-		var compilation =
-			CSharpCompilation.Create(null).AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location));
+		var compilation = CSharpCompilation.Create(null).AddReferences(
+			MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+			MetadataReference.CreateFromFile("bin\\Debug\\net7.0\\test-semantic-model.dll"));
 
 		var file = "Class1.cs";
 		var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(file), CSharpParseOptions.Default, file);
