@@ -101,6 +101,13 @@ static class Program {
 		switch (node) {
 		case BaseTypeDeclarationSyntax baseType:
 			Console.Write(baseType.Identifier);
+			Console.Write(baseType.BaseList);
+			break;
+		case IdentifierNameSyntax identifierName:
+			Console.Write(identifierName.Identifier);
+			break;
+		case PredefinedTypeSyntax predefinedType:
+			Console.Write(predefinedType.Keyword);
 			break;
 		}
 		Console.WriteLine();
