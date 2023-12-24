@@ -99,12 +99,21 @@ static class Program {
 		Console.Write(node.Kind());
 		Console.Write(' ');
 		switch (node) {
-		case BaseTypeDeclarationSyntax baseType:
-			Console.Write(baseType.Identifier);
-			Console.Write(baseType.BaseList);
+		case BaseTypeDeclarationSyntax baseTypeDeclaration:
+			Console.Write(baseTypeDeclaration.Identifier);
+			Console.Write(baseTypeDeclaration.BaseList);
 			break;
 		case IdentifierNameSyntax identifierName:
 			Console.Write(identifierName.Identifier);
+			break;
+		case MethodDeclarationSyntax methodDeclaration:
+			Console.Write(methodDeclaration.Modifiers);
+			Console.Write(' ');
+			Console.Write(methodDeclaration.Identifier);
+			Console.Write(methodDeclaration.ParameterList);
+			break;
+		case ParameterSyntax parameter:
+			Console.Write(parameter.Identifier);
 			break;
 		case PredefinedTypeSyntax predefinedType:
 			Console.Write(predefinedType.Keyword);
