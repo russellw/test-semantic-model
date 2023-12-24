@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-class Program {
+static class Program {
 	delegate void Callback(string file);
 
 	static void Descend(string path, Callback f) {
@@ -96,7 +96,14 @@ class Program {
 
 	static void Print(SyntaxNode node, int level = 0) {
 		Indent(level);
-		Console.WriteLine(node.Kind());
+		Console.Write(node.Kind());
+		Console.Write(' ');
+		switch (node) {
+		case BaseTypeDeclarationSyntax baseType:
+			Console.Write(baseType.Identifier);
+			break;
+		}
+		Console.WriteLine();
 		foreach (var a in node.ChildNodes())
 			Print(a, level + 1);
 	}
