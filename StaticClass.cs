@@ -1,3 +1,5 @@
+using Microsoft.CodeAnalysis;
+
 public static class StaticClass {
 	public static int Cube(int a) {
 		return Square(a) * a;
@@ -5,6 +7,10 @@ public static class StaticClass {
 
 	public static int Square(int a) {
 		return a * a;
+	}
+
+	public static SyntaxNode Ultima(SyntaxNode node) {
+		return node;
 	}
 
 	public static string Xyzzy1(System.Text.StringBuilder sb) {
