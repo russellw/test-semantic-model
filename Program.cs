@@ -5,6 +5,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 static class Program {
 	delegate void Callback(string file);
 
+	static SemanticModel model = null!;
+
 	static void Descend(string path, Callback f) {
 		if (Directory.Exists(path)) {
 			foreach (var entry in new DirectoryInfo(path).EnumerateFileSystemInfos()) {
@@ -84,7 +86,7 @@ static class Program {
 
 			// Output
 			foreach (var tree in trees) {
-				var model = compilation.GetSemanticModel(tree);
+				model = compilation.GetSemanticModel(tree);
 				var root = tree.GetCompilationUnitRoot();
 				Print(root);
 			}
@@ -106,6 +108,23 @@ static class Program {
 		case IdentifierNameSyntax identifierName:
 			Console.Write(identifierName.Identifier);
 			break;
+		case InvocationExpressionSyntax invocationExpression: {
+			Console.Write('|');
+			var info = model.GetSymbolInfo(node);
+			if (info.Symbol != null) {
+				Console.Write(' ');
+				Console.Write(info.Symbol);
+			}
+			if (info.CandidateSymbols.Any()) {
+				Console.Write(' ');
+				Console.Write(info.CandidateSymbols.ToArray());
+			}
+			if (CandidateReason.None != info.CandidateReason) {
+				Console.Write(' ');
+				Console.Write(info.CandidateReason);
+			}
+			break;
+		}
 		case MethodDeclarationSyntax methodDeclaration:
 			Console.Write(methodDeclaration.Modifiers);
 			Console.Write(' ');
