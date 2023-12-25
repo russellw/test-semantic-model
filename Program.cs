@@ -130,6 +130,8 @@ static class Program {
 			Console.Write(' ');
 			Console.Write(methodDeclaration.Identifier);
 			Console.Write(methodDeclaration.ParameterList);
+			Console.Write(" | ");
+			Console.Write(model.GetDeclaredSymbol(methodDeclaration));
 			break;
 		case ParameterSyntax parameter:
 			Console.Write(parameter.Identifier);

@@ -1,0 +1,83 @@
+C:\test-semantic-model>bin\Debug\net7.0\test-semantic-model.exe StaticClass.cs
+CompilationUnit
+  UsingDirective
+    QualifiedName
+      IdentifierName Microsoft
+      IdentifierName CodeAnalysis
+  ClassDeclaration StaticClass
+    MethodDeclaration public static Cube(int a) | StaticClass.Cube(int)
+      PredefinedType int
+      ParameterList
+        Parameter a
+          PredefinedType int
+      Block
+        ReturnStatement
+          MultiplyExpression
+            InvocationExpression | StaticClass.Square(int)
+              IdentifierName Square
+              ArgumentList
+                Argument
+                  IdentifierName a
+            IdentifierName a
+    MethodDeclaration public static Square(int a) | StaticClass.Square(int)
+      PredefinedType int
+      ParameterList
+        Parameter a
+          PredefinedType int
+      Block
+        ReturnStatement
+          MultiplyExpression
+            IdentifierName a
+            IdentifierName a
+    MethodDeclaration public static Ultima1(SyntaxNode node) | StaticClass.Ultima1(SyntaxNode)
+      IdentifierName SyntaxNode
+      ParameterList
+        Parameter node
+          IdentifierName SyntaxNode
+      Block
+        ReturnStatement
+          InvocationExpression | StaticClass.Ultima2(SyntaxNode)
+            IdentifierName Ultima2
+            ArgumentList
+              Argument
+                IdentifierName node
+    MethodDeclaration public static Ultima2(SyntaxNode node) | StaticClass.Ultima2(SyntaxNode)
+      IdentifierName SyntaxNode
+      ParameterList
+        Parameter node
+          IdentifierName SyntaxNode
+      Block
+        ReturnStatement
+          IdentifierName node
+    MethodDeclaration public static Xyzzy1(System.Text.StringBuilder sb) | StaticClass.Xyzzy1(System.Text.StringBuilder)
+      PredefinedType string
+      ParameterList
+        Parameter sb
+          QualifiedName
+            QualifiedName
+              IdentifierName System
+              IdentifierName Text
+            IdentifierName StringBuilder
+      Block
+        ReturnStatement
+          InvocationExpression | StaticClass.Xyzzy2(System.Text.StringBuilder)
+            IdentifierName Xyzzy2
+            ArgumentList
+              Argument
+                IdentifierName sb
+    MethodDeclaration public static Xyzzy2(System.Text.StringBuilder sb) | StaticClass.Xyzzy2(System.Text.StringBuilder)
+      PredefinedType string
+      ParameterList
+        Parameter sb
+          QualifiedName
+            QualifiedName
+              IdentifierName System
+              IdentifierName Text
+            IdentifierName StringBuilder
+      Block
+        ReturnStatement
+          InvocationExpression |
+            SimpleMemberAccessExpression
+              IdentifierName sb
+              IdentifierName ToString
+            ArgumentList
