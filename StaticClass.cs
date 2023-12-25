@@ -9,7 +9,11 @@ public static class StaticClass {
 		return a * a;
 	}
 
-	public static SyntaxNode Ultima(SyntaxNode node) {
+	public static SyntaxNode Ultima1(SyntaxNode node) {
+		return Ultima2(node);
+	}
+
+	public static SyntaxNode Ultima2(SyntaxNode node) {
 		return node;
 	}
 
