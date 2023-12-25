@@ -108,7 +108,7 @@ static class Program {
 		case IdentifierNameSyntax identifierName:
 			Console.Write(identifierName.Identifier);
 			break;
-		case InvocationExpressionSyntax invocationExpression: {
+		case InvocationExpressionSyntax: {
 			Console.Write('|');
 			var info = model.GetSymbolInfo(node);
 			if (info.Symbol != null) {
